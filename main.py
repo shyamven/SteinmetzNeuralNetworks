@@ -36,7 +36,7 @@ if __name__ == "__main__":
         error_mag, error_phase = train_regression(X_train_real, X_train_imag, y_train, X_test_real, X_test_imag, y_test, task, model, iterations, epochs, batch_size, noise)
     elif task == 'Classification':
         X_train_real, X_train_imag, y_train, X_test_real, X_test_imag, y_test = LoadDataset(DatasetName)
-        result_test = train_classification(X_train_real, X_train_imag, y_train, X_test_real, X_test_imag, y_test, task, model, iterations, epochs, batch_size, noise)
+        result_test = train_classification(X_train_real, X_train_imag, y_train, X_test_real, X_test_imag, y_test, task, model, iterations, epochs, batch_size, noise, DatasetName)
     else:
         print('Error: Task must be Regression or Classification')
         exit(1) 
