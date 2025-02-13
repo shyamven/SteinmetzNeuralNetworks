@@ -6,7 +6,7 @@ from torch.utils.data import DataLoader, TensorDataset
 from models.classes import SteinmetzNetwork, NeuralNetwork, ComplexNeuralNetwork
 from utils.process_data import add_complex_normal_noise, fft_based_hilbert_transform
 
-def train_classification(X_train_real, X_train_imag, y_train, X_test_real, X_test_imag, y_test, task, model_choice, iterations, epochs, batch_size, noise):
+def train_classification(X_train_real, X_train_imag, y_train, X_test_real, X_test_imag, y_test, task, model_choice, iterations, epochs, batch_size, noise, DatasetName):
     # Training loop
     acc_test = np.zeros((iterations, epochs))
     
@@ -17,8 +17,13 @@ def train_classification(X_train_real, X_train_imag, y_train, X_test_real, X_tes
         
         # Model instantiation based on choice
         input_size = X_train_real.shape[1]
-        num_classes = 10
         latent_size = 64
+        if DatasetName == "MNIST":
+            num_classes = 10; learning_rate = 1e-3
+        if DatasetName == "CIFAR10":
+            num_classes = 10; learning_rate = 1e-4
+        elif DatasetName == "CIFAR100": 
+            num_classes = 100; learning_rate = 1e-4
         
         if model_choice == "RVNN":
             model = NeuralNetwork(input_size, num_classes, latent_size)
@@ -34,7 +39,6 @@ def train_classification(X_train_real, X_train_imag, y_train, X_test_real, X_tes
         
         # Training neural network
         criterion = nn.CrossEntropyLoss()
-        learning_rate = 1e-4  # MNIST = 1e-4, CIFAR10 = 1e-3
         optimizer = optim.Adam(model.parameters(), lr=learning_rate)
         print(sum(p.numel() for p in model.parameters()))
         test_acc = train(X_train_real, X_train_imag, X_test_real, X_test_imag, y_train, y_test, iterations, i, epochs, batch_size, model, optimizer, criterion, model_choice, task)
