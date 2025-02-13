@@ -41,6 +41,23 @@ def LoadDataset(DatasetName):
         X_test_real, X_test_imag = fft_transform(X_test)
         
         print("CIFAR10 dataset loaded")
+        
+    elif DatasetName == "CIFAR100":
+        transform = transforms.Compose([transforms.ToTensor(), transforms.Normalize((0.5,), (0.5,))])
+        train_dataset = datasets.CIFAR100(root="data/", train=True, transform=transform, download=True)
+        test_dataset = datasets.CIFAR100(root="data/", train=False, transform=transform, download=True)
+        
+        train_loader = torch.utils.data.DataLoader(train_dataset, batch_size=len(train_dataset), shuffle=False)
+        test_loader = torch.utils.data.DataLoader(test_dataset, batch_size=len(test_dataset), shuffle=False)
+        
+        X_train, y_train = next(iter(train_loader))
+        X_test, y_test = next(iter(test_loader))
+        
+        # Transform data to complex domain using FFT
+        X_train_real, X_train_imag = fft_transform(X_train)
+        X_test_real, X_test_imag = fft_transform(X_test)
+        
+        print("CIFAR100 dataset loaded")
     
     elif DatasetName == "ChannelID":
         s_n, r_tilde_n = generate_channel_data()
