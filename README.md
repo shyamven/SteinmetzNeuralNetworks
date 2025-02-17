@@ -50,16 +50,13 @@ Before running the script, ensure that the required libraries are installed and 
 
 Plain Text:
 ```
-Shyam Venkatasubramanian, Ali Pezeshki, Vahid Tarokh. Steinmetz Neural Networks for Complex-Valued Data. arXiv preprint arXiv:2409.10075
+Shyam Venkatasubramanian, Ali Pezeshki, Vahid Tarokh. Steinmetz Neural Networks for Complex-Valued Data. The 28th International Conference on Artificial Intelligence and Statistics.
 ```
 BibTeX:
 ```
-@misc{shyam2024steinmetz,
-      title={Steinmetz Neural Networks for Complex-Valued Data}, 
-      author={Shyam Venkatasubramanian and Ali Pezeshki and Vahid Tarokh},
-      year={2024},
-      eprint={2409.10075},
-      archivePrefix={arXiv},
-      primaryClass={cs.LG}
+@inproceedings{venkatasubramanian2025steinmetz,
+  title={Steinmetz Neural Networks for Complex-Valued Data},
+  author={Venkatasubramanian, Shyam and Pezeshki, Ali and Tarokh, Vahid},
+  booktitle={The 28th International Conference on Artificial Intelligence and Statistics}
 }
 ```
